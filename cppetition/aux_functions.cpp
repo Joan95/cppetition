@@ -4,7 +4,7 @@
 void Init_Aux_Functions(void)
 {
 	/* Init rand SEED for random method */
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 }
 
 

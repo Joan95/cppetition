@@ -20,35 +20,42 @@ typedef enum
 /* Class definition */
 class Player
 {
-public:
-	/* Public methods and attributes */
-	Player()	/* DEFAULT CONSTRUCTOR */
-	{
-		name = "";
-		number = 0;
-		position = NO_VALID_POSITION;
-		injuried = false;			/* Default value */
-		has_the_ball = false;		/* Default value */
-		has_yellow_card = false;	/* Default value */
-	}
+	public:
+		/* Public methods and attributes */
+		Player()	/* DEFAULT CONSTRUCTOR */
+		{
+			name = "";
+			number = 0;
+			position = NO_VALID_POSITION;
+			injuried = false;			/* Default value */
+			has_the_ball = false;		/* Default value */
+			has_yellow_card = false;	/* Default value */
+		}
 
-	Player(std::string new_name, int new_number, player_position new_position, void(*main_action)(void), void(*secondary_action)(void)) { /* Class Constructor with parameters */
-		name = new_name;
-		number = new_number;
-		position = new_position;
-		injuried = false;			/* Default value */
-		has_the_ball = false;		/* Default value */
-		has_yellow_card = false;	/* Default value */
-		attack_action = main_action;
-		defensive_action = secondary_action;
-	}
+		Player(std::string new_name, int new_number, player_position new_position, void(*main_action)(void), void(*secondary_action)(void)) { /* Class Constructor with parameters */
+			name = new_name;
+			number = new_number;
+			position = new_position;
+			injuried = false;			/* Default value */
+			has_the_ball = false;		/* Default value */
+			has_yellow_card = false;	/* Default value */
+			attack_action = main_action;
+			defensive_action = secondary_action;
+		}
 
-	/* Getters */
-	std::string Get_Player_Name(void) { return name; }	/* Getter for private attribute */
-	int Get_Player_Number(void) { return number; }		/* Getter for private attribute */
-	player_position Get_Player_Position(void) { return position; }	/* Getter for private attribute */
+		/* Getters */
+		std::string Get_Player_Name(void) { return name; }	/* Getter for private attribute */
+		int Get_Player_Number(void) { return number; }		/* Getter for private attribute */
+		player_position Get_Player_Position(void) { return position; }	/* Getter for private attribute */
+
+		/* Setters */
+		void Give_The_Ball(void) { has_the_ball = true; }
 
 		/* Other methods */
+		void Do_Action(void)
+		{
+			attack_action();
+		}
 
 	private:
 		/* Private methods and attributes */

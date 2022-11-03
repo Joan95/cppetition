@@ -15,4 +15,5 @@ void Match_Report_Teams_Alignment(Team *local_team, Team *visitor_team)
 	Team_Report_Alignment(local_team);
 	printf("\t-----------------\n");
 	Team_Report_Alignment(visitor_team);
+	printf("\t-----------------\n");
 }

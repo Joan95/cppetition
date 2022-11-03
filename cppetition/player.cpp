@@ -80,16 +80,20 @@ std::string Get_Position_From_Enum(player_position player_position)
 		return "MD";
 
 	case STRIKER:
-		return "DC";
+		return "ST";
 
 	case WINGER:
-		return "SD";
+		return "WI";
+
+	case NO_VALID_POSITION:
+	default:
+		return "";
 	}
 }
 
 void Goalkeeper_Save(void)
 {
-
+	printf("GOALKEEPER JUMPS TO SAVE IT!...\n");
 }
 
 void Break_A_Leg(void)
@@ -104,10 +108,10 @@ void Winger_Center(void)
 
 void Striker_Shoot(void)
 {
-
+	printf("Striker SHOOOOTS!...\n");
 }
 
 void Pass_The_Ball(void)
 {
-
+	printf("He passes the ball...\n");
 }

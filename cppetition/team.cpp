@@ -140,7 +140,7 @@ void Team_Report_Alignment(Team *team)
 
 		for (int i = 0; i < team_size; i++)
 		{
-			printf("\t#%i\t[%s]\t%s\n", tmp_list_of_players[i].Get_Player_Number(), Get_Position_From_Enum(tmp_list_of_players[i].Get_Player_Position()).c_str(), tmp_list_of_players[i].Get_Player_Name().c_str());
+			printf("( )\t#%i\t[%s]\t%s\n", tmp_list_of_players[i].Get_Player_Number(), Get_Position_From_Enum(tmp_list_of_players[i].Get_Player_Position()).c_str(), tmp_list_of_players[i].Get_Player_Name().c_str());
 		}
 	}
 	else
