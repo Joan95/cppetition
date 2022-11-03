@@ -1,5 +1,4 @@
 #include "player.h"
-#include "aux_functions.h"
 
 std::vector<std::string> player_names_list = {
 	"Aristoteles",
@@ -50,11 +49,65 @@ std::vector<std::string> player_names_list = {
 
 std::string Get_Random_Player_Name(void)
 {
-	return player_names_list[Get_Random_Number(player_names_list.size())];
+	return Get_Random_String_From_Vector(player_names_list);
 }
 
 int Get_Random_Player_Number(void)
 {
 	/* Number will go from 2 to 100, remember that 1's is for the Goalkeeper */
 	return Get_Random_Number(98) + 2; /* Min will be 2, max 100 */
+}
+
+player_position Get_Random_Player_Position_Enum(void)
+{
+	int max_positions = (int)WINGER;
+	return (player_position) (Get_Random_Number(max_positions - 1) + 2);	/* Min 2, Max 5*/
+}
+
+
+std::string Get_Position_From_Enum(player_position player_position)
+{
+
+	switch (player_position)
+	{
+	case GOALKEEPER:
+		return "GK";
+
+	case DEFENDER:
+		return "DF";
+		
+	case MIDFIELDER:
+		return "MD";
+
+	case STRIKER:
+		return "DC";
+
+	case WINGER:
+		return "SD";
+	}
+}
+
+void Goalkeeper_Save(void)
+{
+
+}
+
+void Break_A_Leg(void)
+{
+
+}
+
+void Winger_Center(void)
+{
+
+}
+
+void Striker_Shoot(void)
+{
+
+}
+
+void Pass_The_Ball(void)
+{
+
 }

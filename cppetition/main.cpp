@@ -11,9 +11,8 @@ int main()
 	/* Init SEED for srand generation */
 	Init_Aux_Functions();
 
-	/* TODO: Get random name for Team */
-	Team local_team("Destructors", 11);		/* Default team without players */
-	Team visitor_team("Punishers", 11);		/* Default team without players */
+	Team local_team(Get_Random_Team_Name(), 5);			/* Default team without players, only size and naming */
+	Team visitor_team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
 
 	/* Time to Sign in new players */
 	Team_Sign_New_Players(&local_team);

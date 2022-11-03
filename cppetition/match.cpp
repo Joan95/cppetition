@@ -3,10 +3,10 @@
 
 void Print_Match_Header(std::string local_name, std::string visitor_name)
 {
-	printf("\t----------------------------------------------------------");
-	printf("\n\t-- LOCAL TEAM --\t\t\t-- VISITOR TEAM --\n\t-> %s", local_name.c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
-	printf("\t\t\t\t-> %s\n", visitor_name.c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
-	printf("\t----------------------------------------------------------\n\n");
+	printf("\t --------------------------------------------------");
+	printf("\n\t|-- LOCAL TEAM --\t-> %s", local_name.c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
+	printf("\n\t|-- VISITOR TEAM --\t-> %s\n", visitor_name.c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
+	printf("\t --------------------------------------------------\n\n");
 }
 
 

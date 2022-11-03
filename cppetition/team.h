@@ -2,6 +2,8 @@
 #define TEAM_HEADER
 
 #include <string>	/* For string type usage */
+#include <vector>	/* For vector usage */
+
 #include "player.h"	
 #include "aux_functions.h"
 
@@ -27,7 +29,7 @@ class Team
 		int Get_Team_Num_Of_Players(void) { return num_of_players; }	/* Getter for private attribute */
 		Player * Get_Team_Players(void) { return list_of_players; }		/* Getter for private attribute */
 
-		/* Special methods */
+		/* Other methods */
 		void Inscribe_New_Player_In_The_Team(Player *new_player)
 		{
 			list_of_players[num_of_players] = *new_player;
@@ -44,6 +46,7 @@ class Team
 
 
 /* Functions Declaration */
+std::string Get_Random_Team_Name(void);
 void Team_Sign_New_Players(Team *team);
 void Team_Report_Alignment(Team *team);
 
