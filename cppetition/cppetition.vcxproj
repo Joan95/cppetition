@@ -65,6 +65,7 @@
   <ItemGroup>
     <ClCompile Include="aux_functions.cpp" />
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="console_printer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="match.cpp" />
     <ClCompile Include="player.cpp" />
@@ -73,6 +74,7 @@
   <ItemGroup>
     <ClInclude Include="aux_functions.h" />
     <ClInclude Include="ball.h" />
+    <ClInclude Include="console_printer.h" />
     <ClInclude Include="match.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="team.h" />

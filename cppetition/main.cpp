@@ -5,6 +5,8 @@
 
 #include <Windows.h>	/* Sleep */
 
+Console_Printer* console_printer;
+Match* todays_match;
 Team* local_team;
 Team* visitor_team;
 Ball* my_ball;
@@ -17,6 +19,12 @@ int main()
 	// local_team = new Team();
 	local_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
 	visitor_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
+
+	/* Init Console for printing the match */
+	console_printer = new Console_Printer();
+
+	/* Init the Match */
+	todays_match = new Match(local_team, visitor_team, 10, console_printer);
 
 	/* Init the Ball */
 	my_ball = new Ball();
@@ -32,9 +40,8 @@ int main()
 	// printf("%s", local_team.name);
 
 	/* Access using Getter */
-	Print_Match_Header(local_team->Get_Team_Name(), visitor_team->Get_Team_Name());
-
-	Match_Report_Teams_Alignment(local_team, visitor_team);
+	Print_Updated_Match_Header_Information(todays_match->Get_Console_For_Printing(), local_team->Get_Team_Name(), visitor_team->Get_Team_Name());
+	Print_Teams_Alineation(todays_match->Get_Console_For_Printing(), local_team, visitor_team);
 
 	printf(">> Referee is about to start the game!\n");
 
