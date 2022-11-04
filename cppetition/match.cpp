@@ -35,11 +35,8 @@ int Start_Match(Match* match)
 		/* Select a random player from the list */
 		choosen_player = &players_list[Get_Random_Number(1000) % num_of_occurrences];
 
-		/* Give the ball to the choosen player */
-		choosen_player->Give_The_Ball();
-
-		/* Assign the Player to the Ball */
-		match->Get_Ball()->Give_The_Ball_To_Player(choosen_player);
+		/* Init Ball Possession */
+		Ball_Possession_Init(match->Get_Ball(), choosen_player);
 
 		/* Set Match Stage on GOING state */
 		match->Set_Match_Stage(GAME_IS_ON_GOING);
@@ -172,8 +169,14 @@ void Match_Update_Alineation(Match* match)
 				/* Only if Game is ongoing */
 				if(match->Get_Match_Stage() == GAME_IS_ON_GOING)
 				{
-
-					printf("( )\t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+					if (alineation[i].Has_The_Ball())
+					{
+						printf("(*)\t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+					}
+					else
+					{
+						printf("( )\t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+					}
 				}
 				else
 				{

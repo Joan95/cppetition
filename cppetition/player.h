@@ -47,9 +47,11 @@ class Player
 		std::string Get_Player_Name(void) { return name; }	/* Getter for private attribute */
 		int Get_Player_Number(void) { return number; }		/* Getter for private attribute */
 		player_position Get_Player_Position(void) { return position; }	/* Getter for private attribute */
+		bool Has_The_Ball(void) { return has_the_ball; }
 
 		/* Setters */
-		void Give_The_Ball(void) { has_the_ball = true; }
+		void Lose_The_Ball(void) { has_the_ball = false; }
+		void Get_The_Ball(void) { has_the_ball = true; }
 
 		/* Other methods */
 		void Do_Action(void)
