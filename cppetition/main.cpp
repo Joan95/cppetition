@@ -5,29 +5,34 @@
 
 #include <Windows.h>	/* Sleep */
 
+#include "error_types.h"
+
+
 Console_Printer* console_printer;
 Match* todays_match;
 Team* local_team;
 Team* visitor_team;
-Ball* my_ball;
+Ball* match_ball;
 
 int main()
 {
+	bool finish_execution = false;
+
 	/* Init SEED for srand generation */
 	Init_Aux_Functions();
 
-	// local_team = new Team();
+	/* Init Teams that will play */
 	local_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
 	visitor_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
 
 	/* Init Console for printing the match */
 	console_printer = new Console_Printer();
 
-	/* Init the Match */
-	todays_match = new Match(local_team, visitor_team, 10, console_printer);
-
 	/* Init the Ball */
-	my_ball = new Ball();
+	match_ball = new Ball();
+
+	/* Init the Match */
+	todays_match = new Match(local_team, visitor_team, (float) 5000.0, (float) 1, console_printer, match_ball);
 
 	/* Time to Sign in new players */
 	Team_Sign_New_Players(local_team);
@@ -39,33 +44,66 @@ int main()
 	*/
 	// printf("%s", local_team.name);
 
-	/* Access using Getter */
-	Print_Updated_Match_Header_Information(todays_match->Get_Console_For_Printing(), local_team->Get_Team_Name(), visitor_team->Get_Team_Name());
-	Print_Teams_Alineation(todays_match->Get_Console_For_Printing(), local_team, visitor_team);
+	/* Update Match Header in the console */
+	Match_Update_Header(todays_match);
+	Sleep(1000);
+	Match_Update_Alineation(todays_match);
+	Sleep(1000);
 
 	printf(">> Referee is about to start the game!\n");
 
+
+
 	/* Infinite Loop */
-	while(true)
+	while(!finish_execution)
 	{
-		/* Do loop each second */
-		Sleep(1000);
+		/* Do loop depending on match time */
+		Sleep(todays_match->Get_Match_Velocity());
 
-		/* Check whether the ball is in game or not */
-		if (!my_ball->Is_Ball_In_Game())
-		{
-			/* Check stage of the game in order to decide who has the receive the ball */
-			if (Set_Ball_In_Game(my_ball, local_team))
-			{
-				printf("STARTS THE GAME!\n");
-				printf("%s has the ball!\n", my_ball->Who_Has_The_Ball()->Get_Player_Name().c_str());
-			}
-		}
-		else
-		{
-			/* Ball is in game, perform players action */
-			my_ball->Who_Has_The_Ball()->Do_Action();
-		}
+		/* TODO: Clear terminal */
 
+		/* Update Match Header in the console periodically */
+		Match_Update_Header(todays_match);
+		Match_Update_Alineation(todays_match);
+
+		switch (todays_match->Get_Match_Stage())
+		{
+			case GAME_HAS_TO_START_YET:
+				if (!Start_Match(todays_match))
+				{
+					/* Game couldn't start */
+					return NO_VALID_PLAYER_FOUND_ERROR;
+				}
+				break;
+
+			case GAME_IS_ON_GOING:
+
+				/* Check status of the ball */
+				if (todays_match->Get_Ball()->Is_Ball_In_Game())
+				{
+					/* Ball is on the field! Count time and do actions */
+					Loop_Match(todays_match);
+				}
+				else
+				{
+					/* Ball is not in game, set in game back again */
+				}
+				break;
+
+			case GAME_TIME_UP:
+				Finish_Match(todays_match);
+				break;
+
+			case END_OF_THE_GAME:
+				Report_Results(todays_match);
+				break;
+
+			case NO_VALID_MATCH_STAGE:
+			default:
+				return NO_VALID_MATCH_STAGE_ERROR;
+		}
 	}
+
+	/* If here, no issues found */
+	return NO_ERROR_FOUND;
 }

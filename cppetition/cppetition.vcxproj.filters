@@ -56,5 +56,8 @@
     <ClInclude Include="console_printer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="error_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -75,6 +75,7 @@
     <ClInclude Include="aux_functions.h" />
     <ClInclude Include="ball.h" />
     <ClInclude Include="console_printer.h" />
+    <ClInclude Include="error_types.h" />
     <ClInclude Include="match.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="team.h" />

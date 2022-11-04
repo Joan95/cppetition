@@ -2,14 +2,12 @@
 #define BALL_HEADER
 
 #include "player.h"
-#include "team.h"
 
 class Ball
 {
 public:
 	Ball() 
 	{
-		Player* player_with_the_ball = NULL;
 		is_ball_in_game = false;
 	}
 
@@ -29,6 +27,5 @@ private:
 	bool is_ball_in_game;
 };
 
-bool Set_Ball_In_Game(Ball* ball, Team* team_to_retrieve_the_ball);
 
 #endif

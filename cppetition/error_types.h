@@ -1,0 +1,13 @@
+#ifndef ERROR_TYPES_HEADER
+#define ERROR_TYPES_HEADER	
+
+
+typedef enum
+{
+	NO_ERROR_FOUND	= 0,
+	NO_VALID_PLAYER_FOUND_ERROR,
+	NO_VALID_MATCH_STAGE_ERROR,
+} T_error_code; 
+
+
+#endif
