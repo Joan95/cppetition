@@ -15,7 +15,7 @@ int Get_Random_Number(int range)
 }
 
 
-std::string Get_Random_String_From_Vector(std::vector<std::string> list)
+std::string Get_Random_String_From_String_Vector(std::vector<std::string> list)
 {
 	return list[Get_Random_Number(list.size())].c_str();
 }

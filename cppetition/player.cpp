@@ -1,55 +1,63 @@
 #include "player.h"
 
-std::vector<std::string> player_names_list = {
-	"Aristoteles",
-	"Platon",
-	"Socrates",
-	"John Locke",
-	"Immanuel Kant",
-	"Rene Descartes",
-	"Friedrich Nietzsche",
-	"Confuncio",
-	"Karl Marx",
-	"David Hume",
-	"Epicuro",
-	"Ludwig Wittgenstein",
-	"Georg Wilhelm Friedrich Hegel",
-	"Ralph Waldo Emerson",
-	"Baruch Spinoza",
-	"Soren Kierkegaard",
-	"Michel Foucault",
-	"Jean-Jacques Rousseau",
-	"Nicolas Maquiavelo",
-	"Bertrand Russell",
-	"Agustin de Hipona",
-	"Avicena",
-	"John Stuart Mill",
-	"Zenon de Citio",
-	"Martin Heidegger",
-	"Jean-Paul Sartre",
-	"Tomas de Aquino",
-	"Thomas Hobbes",
-	"Jacques Derrida",
-	"Edmund Husserl",
-	"Arthur Schopenhauer",
-	"Gottfried Leibniz",
-	"Karl Popper",
-	"William James",
-	"Simone de Beavoir",
-	"Blaise Pascal",
-	"Gottlob Frege",
-	"Ayn Rand",
-	"Pitagoras",
-	"Diogenes de Sinope",
-	"Parmenides de Elea",
-	"Hannah Arendt",
-	"John Dewey",
-	"Brian Leiter"
+std::vector<player_status> player_names_list = {
+	{"Aristoteles", 5, 5, 5},
+	{"Platon", 5, 5, 5},
+	{"Socrates", 5, 5, 5},
+	{"John Locke", 5, 5, 5},
+	{"Immanuel Kant", 5, 5, 5},
+	{"Rene Descartes", 5, 5, 5},
+	{"Friedrich Nietzsche", 5, 5, 5},
+	{"Confuncio", 5, 5, 5},
+	{"Karl Marx", 5, 5, 5},
+	{"David Hume", 5, 5, 5},
+	{"Epicuro", 5, 5, 5},
+	{"Ludwig Wittgenstein", 5, 5, 5},
+	{"Georg Wilhelm Friedrich Hegel", 5, 5, 5},
+	{"Ralph Waldo Emerson", 5, 5, 5},
+	{"Baruch Spinoza", 5, 5, 5},
+	{"Soren Kierkegaard", 5, 5, 5},
+	{"Michel Foucault", 5, 5, 5},
+	{"Jean-Jacques Rousseau", 5, 5, 5},
+	{"Nicolas Maquiavelo", 5, 5, 5},
+	{"Bertrand Russell", 5, 5, 5},
+	{"Agustin de Hipona", 5, 5, 5},
+	{"Avicena", 5, 5, 5},
+	{"John Stuart Mill", 5, 5, 5},
+	{"Zenon de Citio", 5, 5, 5},
+	{"Martin Heidegger", 5, 5, 5},
+	{"Jean-Paul Sartre", 5, 5, 5},
+	{"Tomas de Aquino", 5, 5, 5},
+	{"Thomas Hobbes", 5, 5, 5},
+	{"Jacques Derrida", 5, 5, 5},
+	{"Edmund Husserl", 5, 5, 5},
+	{"Arthur Schopenhauer", 5, 5, 5},
+	{"Gottfried Leibniz", 5, 5, 5},
+	{"Karl Popper", 5, 5, 5},
+	{"William James", 5, 5, 5},
+	{"Simone de Beavoir", 5, 5, 5},
+	{"Blaise Pascal", 5, 5, 5},
+	{"Gottlob Frege", 5, 5, 5},
+	{"Ayn Rand", 5, 5, 5},
+	{"Pitagoras", 5, 5, 5},
+	{"Diogenes de Sinope", 5, 5, 5},
+	{"Parmenides de Elea", 5, 5, 5},
+	{"Hannah Arendt", 5, 5, 5},
+	{"John Dewey", 5, 5, 5},
+	{"Brian Leiter", 5, 5, 5},
+	{"Rubiks", 8, 8, 8},
 };
 
 std::string Get_Random_Player_Name(void)
 {
-	return Get_Random_String_From_Vector(player_names_list);
+	std::vector<std::string> tmp_player_names_list;
+
+	for (int i = 0; i < player_names_list.size(); i++)
+	{
+		tmp_player_names_list.push_back(player_names_list[i].player_name);
+	}
+
+	return Get_Random_String_From_String_Vector(tmp_player_names_list);
 }
 
 int Get_Random_Player_Number(void)

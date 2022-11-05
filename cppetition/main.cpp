@@ -22,8 +22,8 @@ int main()
 	Init_Aux_Functions();
 
 	/* Init Teams that will play */
-	local_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
-	visitor_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
+	local_team = new Team(Get_Random_Team_Name(), 11);		/* Default team without players, only size and naming */
+	visitor_team = new Team(Get_Random_Team_Name(), 11);		/* Default team without players, only size and naming */
 
 	/* Init Console for printing the match */
 	console_printer = new Console_Printer();
@@ -92,10 +92,19 @@ int main()
 
 			case GAME_TIME_UP:
 				Finish_Match(todays_match);
+
+				/* Move to next match stage */
+				todays_match->Set_Match_Stage(END_OF_THE_GAME);
 				break;
 
 			case END_OF_THE_GAME:
 				Report_Results(todays_match);
+
+				/* Wait for 5 seconds */
+				Sleep(5000);
+
+				/* End the program */
+				finish_execution = true;
 				break;
 
 			case NO_VALID_MATCH_STAGE:

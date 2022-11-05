@@ -44,5 +44,6 @@ class Console_Printer
 };
 
 /* Functions Declaration */
+void Clean_Line(void);
 
 #endif 

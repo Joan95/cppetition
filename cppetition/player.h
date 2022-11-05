@@ -17,6 +17,12 @@ typedef enum
 } player_position;
 
 
+typedef struct
+{
+	std::string player_name;
+	int player_shoot, player_pass, player_save;
+} player_status;
+
 /* Class definition */
 class Player
 {

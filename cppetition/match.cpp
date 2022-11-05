@@ -229,7 +229,21 @@ void Match_Update_Alineation(Match* match)
 
 void Finish_Match(Match* match)
 {
+	printf("Match is over!\n");
 
+	/* Check for results */
+	if (match->Get_Match_Local_Goals() > match->Get_Match_Visitor_Goals())
+	{
+		printf("%s WINS THE MATCH!\n", match->Get_Match_Local_Team()->Get_Team_Name().c_str());
+	}
+	else if (match->Get_Match_Local_Goals() < match->Get_Match_Visitor_Goals())
+	{
+		printf("%s WINS THE MATCH!\n", match->Get_Match_Visitor_Team()->Get_Team_Name().c_str());
+	}
+	else
+	{
+		printf("It has been a DRAW!\n");
+	}
 }
 
 

@@ -64,7 +64,7 @@ std::vector<std::string> team_names_list = {
 
 std::string Get_Random_Team_Name(void)
 {
-	return Get_Random_String_From_Vector(team_names_list);
+	return Get_Random_String_From_String_Vector(team_names_list);
 }
 
 

@@ -11,6 +11,6 @@
 /* Functions Declaration */
 void Init_Aux_Functions(void);
 int Get_Random_Number(int range);
-std::string Get_Random_String_From_Vector(std::vector<std::string> list);
+std::string Get_Random_String_From_String_Vector(std::vector<std::string> list);
 
 #endif

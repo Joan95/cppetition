@@ -48,6 +48,8 @@ class Match
 		match_stage Get_Match_Stage(void) { return stage_of_the_match; }
 		Team* Get_Match_Local_Team(void) { return local_team; }
 		Team* Get_Match_Visitor_Team(void) { return visitor_team; }
+		unsigned int Get_Match_Local_Goals(void) { return local_goals; }
+		unsigned int Get_Match_Visitor_Goals(void) { return visitor_goals; }
 		float Get_Match_Max_Time(void) { return max_match_time; }
 		float Get_Match_Current_Time(void) { return current_match_time; }
 		float Get_Match_Velocity(void) { return velocity; }
