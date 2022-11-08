@@ -22,8 +22,8 @@ int main()
 	Init_Aux_Functions();
 
 	/* Init Teams that will play */
-	local_team = new Team(Get_Random_Team_Name(), 11);		/* Default team without players, only size and naming */
-	visitor_team = new Team(Get_Random_Team_Name(), 11);		/* Default team without players, only size and naming */
+	local_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
+	visitor_team = new Team(Get_Random_Team_Name(), 5);		/* Default team without players, only size and naming */
 
 	/* Init Console for printing the match */
 	console_printer = new Console_Printer();
@@ -58,9 +58,7 @@ int main()
 	while(!finish_execution)
 	{
 		/* Do loop depending on match time */
-		Sleep(todays_match->Get_Match_Velocity());
-
-		/* TODO: Clear terminal */
+		Sleep((DWORD) todays_match->Get_Match_Velocity());
 
 		/* Update Match Header in the console periodically */
 		Match_Update_Header(todays_match);

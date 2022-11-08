@@ -36,7 +36,7 @@ class Team
 		int Get_Team_Num_Of_Players(void) { return num_of_players; }	/* Getter for private attribute */
 		Player* Get_Team_Players(void) { return list_of_players; }		/* Getter for private attribute */
 		
-		int Get_Player_Based_On_Position(Player* tmp_list_of_players, player_position position)
+		int Get_Player_Based_On_Position(Player** tmp_list_of_players, player_position position)
 		{
 			int list_indx = 0;
 
@@ -46,7 +46,8 @@ class Team
 				{
 					if (list_of_players[i].Get_Player_Position() == position)
 					{
-						tmp_list_of_players[list_indx] = list_of_players[i];
+						/* Save player using pointer, so its stats will be visible */
+						tmp_list_of_players[list_indx] = &list_of_players[i];
 						list_indx++;
 					}
 				}

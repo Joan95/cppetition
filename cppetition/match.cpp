@@ -13,7 +13,7 @@ void Loop_Match(Match* match)
 
 int Start_Match(Match* match)
 {
-	Player* players_list = new Player[match->Get_Match_Local_Team()->Get_Team_Num_Of_Players() - 1];
+	Player** players_list = new Player* [match->Get_Match_Local_Team()->Get_Team_Num_Of_Players()];
 	Player* choosen_player;
 	int base_position = (int)WINGER;
 	int num_of_occurrences = 0;
@@ -33,7 +33,7 @@ int Start_Match(Match* match)
 	if (num_of_occurrences != 0)
 	{
 		/* Select a random player from the list */
-		choosen_player = &players_list[Get_Random_Number(1000) % num_of_occurrences];
+		choosen_player = players_list[Get_Random_Number(1000) % num_of_occurrences];
 
 		/* Init Ball Possession */
 		Ball_Possession_Init(match->Get_Ball(), choosen_player);
@@ -50,12 +50,14 @@ int Start_Match(Match* match)
 	}
 }
 
+/* Update Header Console Zone */
 void Match_Update_Header(Match* match)
 {
 	CONSOLE_SCREEN_BUFFER_INFO cbsi;
 	COORD old_coordinates;
 	bool restore_old_coordinate = true;
 	Console_Printer* console = match->Get_Match_Console();
+	std::string text_to_be_printed = "";
 
 	/* Check if we have already stored value for header coordenates, otherwise update it */
 	if (!console->Get_Match_Header_Struct().locked_position)
@@ -70,6 +72,26 @@ void Match_Update_Header(Match* match)
 	/* Check we are having valid coordinates for writing */
 	if (console->Get_Match_Header_Struct().locked_position)
 	{
+		/* Check if clean header can be run */
+		if (console->Get_Match_Header_Struct().y_offset != SINGLE_COORDINATE_NO_INIT_VALUE)
+		{
+			/* Set cursor in Header Zone */
+			SetConsoleCursorPosition(console->Get_STD_OUT(), console->Get_Match_Header_Struct().coordinates);
+
+			text_to_be_printed = text_to_be_printed + "                                                                                 ";
+			for (int i = 0U ; i < console->Get_Match_Header_Struct().y_offset - 1; i++)
+			{
+				text_to_be_printed = text_to_be_printed + "\n";
+				text_to_be_printed = text_to_be_printed + "                                                                                 ";
+			}
+
+			/* Clean Header */
+			printf(text_to_be_printed.c_str());
+			
+			/* Re-init for next usage */
+			text_to_be_printed = "";
+		}
+
 		/* Get current cursor position for restoring it */
 		if (GetConsoleScreenBufferInfo(console->Get_STD_OUT(), &cbsi))
 		{
@@ -87,27 +109,44 @@ void Match_Update_Header(Match* match)
 			/* Set cursor in Header Zone */
 			SetConsoleCursorPosition(console->Get_STD_OUT(), console->Get_Match_Header_Struct().coordinates);
 
-			/* Print in Header zone */
-			printf("\t --------------------------------------------------\n");
+			/* Construct Header zone */
+			text_to_be_printed = text_to_be_printed + "\t --------------------------------------------------\n";
 
+			text_to_be_printed = text_to_be_printed + "\t|\tVelocity: ";
+			text_to_be_printed = text_to_be_printed + std::to_string(match->Get_Match_Velocity());
+
+			/* Info that will be only available once the game is being played */
 			if (match->Get_Match_Stage() == GAME_IS_ON_GOING)
 			{
-				printf("\t|\t\t\t\tMinute: %f / %f\n", match->Get_Match_Current_Time(), match->Get_Match_Max_Time());
+				text_to_be_printed = text_to_be_printed + "\t| Minute:";
+				text_to_be_printed = text_to_be_printed + std::to_string(match->Get_Match_Current_Time());
+				text_to_be_printed = text_to_be_printed + " / " + std::to_string(match->Get_Match_Max_Time());	
 			}
-			else
-			{
-				printf("\t|\tVelocity: %f\n", match->Get_Match_Velocity());
-			}
-			printf("\t|-- LOCAL TEAM --\t-> %s", match->Get_Match_Local_Team()->Get_Team_Name().c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
-			printf("\n");
-			printf("\t|-- VISITOR TEAM --\t-> %s", match->Get_Match_Visitor_Team()->Get_Team_Name().c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
-			printf("\n");
-			printf("\t --------------------------------------------------\n\n");
+
+			text_to_be_printed = text_to_be_printed + "\n";
+			text_to_be_printed = text_to_be_printed + "\t|-- LOCAL TEAM --\t-> ";
+			text_to_be_printed = text_to_be_printed + match->Get_Match_Local_Team()->Get_Team_Name();
+			text_to_be_printed = text_to_be_printed + "\n";
+			text_to_be_printed = text_to_be_printed + "\t|-- VISITOR TEAM --\t-> ";
+			text_to_be_printed = text_to_be_printed + match->Get_Match_Visitor_Team()->Get_Team_Name();	
+			text_to_be_printed = text_to_be_printed + "\n";
+			text_to_be_printed = text_to_be_printed + "\t --------------------------------------------------\n\n";
+
+			/* Print text */
+			printf("%s", text_to_be_printed.c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
 
 			/* Restore the old position if needed */
 			if (restore_old_coordinate)
 			{
 				SetConsoleCursorPosition(console->Get_STD_OUT(), old_coordinates);
+			}
+			else
+			{
+				/* Get status after printing */
+				GetConsoleScreenBufferInfo(console->Get_STD_OUT(), &cbsi);
+
+				/* It was first time to get updated, calculate the amount of space it takes */
+				console->Set_Match_Header_Offset((cbsi.dwCursorPosition.X - old_coordinates.X), (cbsi.dwCursorPosition.Y - old_coordinates.Y));
 			}
 
 			/* Update current position */
@@ -121,6 +160,7 @@ void Match_Update_Header(Match* match)
 	}
 }
 
+/* Update Alineation Console Zone */
 void Match_Update_Alineation(Match* match)
 {
 	CONSOLE_SCREEN_BUFFER_INFO cbsi;
@@ -128,6 +168,7 @@ void Match_Update_Alineation(Match* match)
 	bool restore_old_coordinate = true;
 	Console_Printer* console = match->Get_Match_Console();
 	Player* alineation;
+	std::string text_to_be_printed = "";
 
 	/* Check if we have already stored value for alineation coordenates, otherwise update it */
 	if (!console->Get_Match_Alineation_Struct().locked_position)
@@ -142,6 +183,25 @@ void Match_Update_Alineation(Match* match)
 	/* Check we are having valid coordinates for writing */
 	if (console->Get_Match_Alineation_Struct().locked_position)
 	{
+		/* Check if clean header can be run */
+		if (console->Get_Match_Alineation_Struct().y_offset != SINGLE_COORDINATE_NO_INIT_VALUE)
+		{
+			/* Set cursor in Header Zone */
+			SetConsoleCursorPosition(console->Get_STD_OUT(), console->Get_Match_Alineation_Struct().coordinates);
+
+			for (int i = 0U ; i < console->Get_Match_Alineation_Struct().y_offset; i++)
+			{
+				text_to_be_printed = text_to_be_printed + "                                                                                 ";
+				text_to_be_printed = text_to_be_printed + "\n";
+			}
+
+			/* Clean Header */
+			printf(text_to_be_printed.c_str());
+
+			/* Re-init for next usage */
+			text_to_be_printed = "";
+		}
+
 		/* Get current cursor position for restoring it */
 		if (GetConsoleScreenBufferInfo(console->Get_STD_OUT(), &cbsi))
 		{
@@ -160,7 +220,9 @@ void Match_Update_Alineation(Match* match)
 			SetConsoleCursorPosition(console->Get_STD_OUT(), console->Get_Match_Alineation_Struct().coordinates);
 
 			/* Print local team name */
-			printf(">> %s\n", match->Get_Match_Local_Team()->Get_Team_Name().c_str());
+			text_to_be_printed = text_to_be_printed + ">> ";
+			text_to_be_printed = text_to_be_printed + match->Get_Match_Local_Team()->Get_Team_Name();
+			text_to_be_printed = text_to_be_printed + "\n";
 
 			/* Get local alineation */
 			alineation = match->Get_Match_Local_Team()->Get_Team_Players();
@@ -171,21 +233,29 @@ void Match_Update_Alineation(Match* match)
 				{
 					if (alineation[i].Has_The_Ball())
 					{
-						printf("(*)\t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+						text_to_be_printed = text_to_be_printed + "(*)\t";
 					}
 					else
 					{
-						printf("( )\t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+						text_to_be_printed = text_to_be_printed + "( )\t";
 					}
 				}
 				else
 				{
-					printf("   \t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+					text_to_be_printed = text_to_be_printed + "   \t";
 				}
+				text_to_be_printed = text_to_be_printed + "#" + std::to_string(alineation[i].Get_Player_Number()) + "\t[";
+				text_to_be_printed = text_to_be_printed + Get_Position_From_Enum(alineation[i].Get_Player_Position()) + "]\t";
+				text_to_be_printed = text_to_be_printed + alineation[i].Get_Player_Name();
+				text_to_be_printed = text_to_be_printed + "\n";
 			}
 
+			text_to_be_printed = text_to_be_printed + "\n";
+
 			/* Print visitor team name */
-			printf("\n>> %s\n", match->Get_Match_Visitor_Team()->Get_Team_Name().c_str());
+			text_to_be_printed = text_to_be_printed + ">> ";
+			text_to_be_printed = text_to_be_printed + match->Get_Match_Visitor_Team()->Get_Team_Name();
+			text_to_be_printed = text_to_be_printed + "\n";
 
 			/* Get visitor alineation */
 			alineation = match->Get_Match_Visitor_Team()->Get_Team_Players();
@@ -194,21 +264,42 @@ void Match_Update_Alineation(Match* match)
 				/* Only if Game is ongoing */
 				if (match->Get_Match_Stage() == GAME_IS_ON_GOING)
 				{
-
-					printf("( )\t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+					if (alineation[i].Has_The_Ball())
+					{
+						text_to_be_printed = text_to_be_printed + "(*)\t";
+					}
+					else
+					{
+						text_to_be_printed = text_to_be_printed + "( )\t";
+					}
 				}
 				else
 				{
-					printf("   \t#%i\t[%s]\t%s\n", alineation[i].Get_Player_Number(), Get_Position_From_Enum(alineation[i].Get_Player_Position()).c_str(), alineation[i].Get_Player_Name().c_str());
+					text_to_be_printed = text_to_be_printed + "   \t";
 				}
+				text_to_be_printed = text_to_be_printed + "#" + std::to_string(alineation[i].Get_Player_Number()) + "\t[";
+				text_to_be_printed = text_to_be_printed + Get_Position_From_Enum(alineation[i].Get_Player_Position()) + "]\t";
+				text_to_be_printed = text_to_be_printed + alineation[i].Get_Player_Name();
+				text_to_be_printed = text_to_be_printed + "\n";
 			}
 
-			printf("\n");
+			text_to_be_printed = text_to_be_printed + "\n";
+
+			/* Print text */
+			printf("%s", text_to_be_printed.c_str());	/* c_str() for printing std::string pretty, otherwise rubbish will appear */
 
 			/* Restore the old position if needed */
 			if (restore_old_coordinate)
 			{
 				SetConsoleCursorPosition(console->Get_STD_OUT(), old_coordinates);
+			}
+			else
+			{
+				/* Get status after printing */
+				GetConsoleScreenBufferInfo(console->Get_STD_OUT(), &cbsi);
+
+				/* It was first time to get updated, calculate the amount of space it takes */
+				console->Set_Match_Alienation_Offset((cbsi.dwCursorPosition.X - old_coordinates.X), (cbsi.dwCursorPosition.Y - old_coordinates.Y));
 			}
 
 			/* Update current position */

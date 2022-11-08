@@ -10,6 +10,8 @@
 typedef struct
 {
 	bool locked_position;
+	int x_offset;
+	int y_offset;
 	COORD coordinates;
 } T_coordinate_struct;
 
@@ -19,8 +21,12 @@ class Console_Printer
 		Console_Printer() {
 			hStdout = GetStdHandle(STD_OUTPUT_HANDLE);		/* Init standard console Handle for console manipulation */
 			match_header_coord.locked_position = false;
+			match_header_coord.x_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
+			match_header_coord.y_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
 			match_header_coord.coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
 			match_alineation_coord.locked_position = false;
+			match_alineation_coord.x_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
+			match_alineation_coord.y_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
 			match_alineation_coord.coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
 			current_terminal_position = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
 		}
@@ -33,7 +39,9 @@ class Console_Printer
 
 		/* Setters */
 		void Update_Match_Header_Coordinates(COORD match_coord) { match_header_coord.coordinates = match_coord; match_header_coord.locked_position = true; }
+		void Set_Match_Header_Offset(int x_offset, int y_offset) { match_header_coord.x_offset = x_offset; match_header_coord.y_offset = y_offset; }
 		void Update_Match_Alienation_Coordinates(COORD match_coord) { match_alineation_coord.coordinates = match_coord; match_alineation_coord.locked_position = true; }
+		void Set_Match_Alienation_Offset(int x_offset, int y_offset) { match_alineation_coord.x_offset = x_offset; match_alineation_coord.y_offset = y_offset; }
 		void Update_Current_Terminal_Position(COORD current_position) { current_terminal_position = current_position; }
 
 	private:
