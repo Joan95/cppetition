@@ -65,14 +65,18 @@ class Match
 
 		void Do_Match_Cycle(void) 
 		{
-			if (current_match_time >= max_match_time)
+			/* Count time only if Game is being played */
+			if (stage_of_the_match == GAME_IS_ON_GOING)
 			{
-				/* Time Up! */
-				stage_of_the_match = GAME_TIME_UP;
-			}
-			else
-			{
-				current_match_time += velocity;
+				if (current_match_time >= max_match_time)
+				{
+					/* Time Up! */
+					stage_of_the_match = GAME_TIME_UP;
+				}
+				else
+				{
+					current_match_time += velocity;
+				}
 			}
 		}
 
@@ -94,7 +98,12 @@ void Loop_Match(Match* match);
 int Start_Match(Match* match);
 void Finish_Match(Match* match);
 void Report_Results(Match* match);
-void Match_Update_Header(Match* match);
-void Match_Update_Alineation(Match* match);
+std::string Match_Update_Header(Match* match);
+std::string Match_Update_Alineation(Match* match);
+std::string Match_Update_Event(Match* match);
+
+void Update_Zone(Match* match, T_console_zone* zone_to_update);
+
+void Match_Update_Terminal_Feedback(Match* match);
 
 #endif

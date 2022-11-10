@@ -10,5 +10,4 @@ void Ball_Possession_Changed(Ball* ball, Player* new_player_with_the_ball)
 {
 	/* Set Ball in game */
 	ball->Change_Player_Possession(new_player_with_the_ball);
-
 }

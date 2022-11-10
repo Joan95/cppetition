@@ -44,25 +44,14 @@ int main()
 	*/
 	// printf("%s", local_team.name);
 
-	/* Update Match Header in the console */
-	Match_Update_Header(todays_match);
-	Sleep(1000);
-	Match_Update_Alineation(todays_match);
-	Sleep(1000);
-
-	printf(">> Referee is about to start the game!\n");
-
-
-
 	/* Infinite Loop */
 	while(!finish_execution)
 	{
+		/* Update information periodically */
+		Loop_Match(todays_match);
+
 		/* Do loop depending on match time */
 		Sleep((DWORD) todays_match->Get_Match_Velocity());
-
-		/* Update Match Header in the console periodically */
-		Match_Update_Header(todays_match);
-		Match_Update_Alineation(todays_match);
 
 		switch (todays_match->Get_Match_Stage())
 		{
@@ -80,7 +69,6 @@ int main()
 				if (todays_match->Get_Ball()->Is_Ball_In_Game())
 				{
 					/* Ball is on the field! Count time and do actions */
-					Loop_Match(todays_match);
 				}
 				else
 				{

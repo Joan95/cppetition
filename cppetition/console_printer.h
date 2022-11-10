@@ -10,48 +10,53 @@
 typedef struct
 {
 	bool locked_position;
-	int x_offset;
-	int y_offset;
-	COORD coordinates;
-} T_coordinate_struct;
+	COORD init_coordinates;
+	COORD offset;
+	std::string info_to_write;
+} T_console_zone;
 
 class Console_Printer
 {
 	public:
 		Console_Printer() {
 			hStdout = GetStdHandle(STD_OUTPUT_HANDLE);		/* Init standard console Handle for console manipulation */
-			match_header_coord.locked_position = false;
-			match_header_coord.x_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
-			match_header_coord.y_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
-			match_header_coord.coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
-			match_alineation_coord.locked_position = false;
-			match_alineation_coord.x_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
-			match_alineation_coord.y_offset = SINGLE_COORDINATE_NO_INIT_VALUE;
-			match_alineation_coord.coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			/* Header Zone */
+			match_header_zone.locked_position = false;
+			match_header_zone.init_coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			match_header_zone.offset = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			match_header_zone.info_to_write = "";
+			/* Alineation Zone */
+			match_alineation_zone.locked_position = false;
+			match_alineation_zone.init_coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			match_alineation_zone.offset = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			match_alineation_zone.info_to_write = "";
+			/* Event Zone */
+			match_event_zone.locked_position = false;
+			match_event_zone.init_coordinates = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			match_event_zone.offset = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
+			match_event_zone.info_to_write = "";
+			/* Current terminal position */
 			current_terminal_position = { SINGLE_COORDINATE_NO_INIT_VALUE, SINGLE_COORDINATE_NO_INIT_VALUE };
 		}
 
 		/* Getters */
 		HANDLE Get_STD_OUT(void) { return hStdout; }
-		T_coordinate_struct Get_Match_Header_Struct(void) { return match_header_coord; }
-		T_coordinate_struct Get_Match_Alineation_Struct(void) { return match_alineation_coord; }
+		T_console_zone* Get_Match_Header_Struct(void) { return &match_header_zone; }
+		T_console_zone* Get_Match_Alineation_Struct(void) { return &match_alineation_zone; }
+		T_console_zone* Get_Match_Event_Struct(void) { return &match_event_zone; }
 		COORD Get_Current_Terminal_Position(void) { return current_terminal_position; }
 
 		/* Setters */
-		void Update_Match_Header_Coordinates(COORD match_coord) { match_header_coord.coordinates = match_coord; match_header_coord.locked_position = true; }
-		void Set_Match_Header_Offset(int x_offset, int y_offset) { match_header_coord.x_offset = x_offset; match_header_coord.y_offset = y_offset; }
-		void Update_Match_Alienation_Coordinates(COORD match_coord) { match_alineation_coord.coordinates = match_coord; match_alineation_coord.locked_position = true; }
-		void Set_Match_Alienation_Offset(int x_offset, int y_offset) { match_alineation_coord.x_offset = x_offset; match_alineation_coord.y_offset = y_offset; }
 		void Update_Current_Terminal_Position(COORD current_position) { current_terminal_position = current_position; }
 
 	private:
 		HANDLE hStdout;
-		T_coordinate_struct match_header_coord;
-		T_coordinate_struct match_alineation_coord;
+		T_console_zone match_header_zone;
+		T_console_zone match_alineation_zone;
+		T_console_zone match_event_zone;
 		COORD current_terminal_position;
 };
 
 /* Functions Declaration */
-void Clean_Line(void);
 
 #endif 
