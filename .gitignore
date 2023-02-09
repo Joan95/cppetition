@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Cache files 
+.vs/
+x64/
