@@ -24,6 +24,18 @@
     <ClCompile Include="source\objects\teams\team.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\objects\leagues\league.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\displayer\displayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\os\sheduler\scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\os\timer\timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\main.h">
@@ -33,6 +45,36 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\objects\teams\team.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\teams\team_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\players\player_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\leagues\league.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\leagues\league_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\displayer\displayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\displayer\displayer_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\sheduler\scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\sheduler\scheduler_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\timer\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\timer\timer_api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
