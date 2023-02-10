@@ -128,8 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\main\main.cpp" />
+    <ClCompile Include="source\objects\ball\ball.cpp" />
     <ClCompile Include="source\objects\displayer\displayer.cpp" />
+    <ClCompile Include="source\objects\field\field.cpp" />
     <ClCompile Include="source\objects\leagues\league.cpp" />
+    <ClCompile Include="source\objects\match\match.cpp" />
     <ClCompile Include="source\objects\players\player.cpp" />
     <ClCompile Include="source\objects\teams\team.cpp" />
     <ClCompile Include="source\os\sheduler\scheduler.cpp" />
@@ -137,10 +140,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\main.h" />
+    <ClInclude Include="source\objects\ball\ball.h" />
+    <ClInclude Include="source\objects\ball\ball_api.h" />
     <ClInclude Include="source\objects\displayer\displayer.h" />
     <ClInclude Include="source\objects\displayer\displayer_api.h" />
+    <ClInclude Include="source\objects\field\field.h" />
+    <ClInclude Include="source\objects\field\field_api.h" />
     <ClInclude Include="source\objects\leagues\league.h" />
     <ClInclude Include="source\objects\leagues\league_api.h" />
+    <ClInclude Include="source\objects\match\match.h" />
+    <ClInclude Include="source\objects\match\match_api.h" />
     <ClInclude Include="source\objects\players\player.h" />
     <ClInclude Include="source\objects\players\player_api.h" />
     <ClInclude Include="source\objects\teams\team.h" />
