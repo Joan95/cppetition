@@ -135,10 +135,12 @@
     <ClCompile Include="source\objects\match\match.cpp" />
     <ClCompile Include="source\objects\players\player.cpp" />
     <ClCompile Include="source\objects\teams\team.cpp" />
+    <ClCompile Include="source\os\databases\data_base.cpp" />
     <ClCompile Include="source\os\sheduler\scheduler.cpp" />
     <ClCompile Include="source\os\timer\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\lib\types.h" />
     <ClInclude Include="source\main\main.h" />
     <ClInclude Include="source\objects\ball\ball.h" />
     <ClInclude Include="source\objects\ball\ball_api.h" />
@@ -154,10 +156,15 @@
     <ClInclude Include="source\objects\players\player_api.h" />
     <ClInclude Include="source\objects\teams\team.h" />
     <ClInclude Include="source\objects\teams\team_api.h" />
+    <ClInclude Include="source\os\databases\data_base.h" />
+    <ClInclude Include="source\os\databases\data_base_api.h" />
     <ClInclude Include="source\os\sheduler\scheduler.h" />
     <ClInclude Include="source\os\sheduler\scheduler_api.h" />
     <ClInclude Include="source\os\timer\timer.h" />
     <ClInclude Include="source\os\timer\timer_api.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="source\os\databases\players_data_base.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

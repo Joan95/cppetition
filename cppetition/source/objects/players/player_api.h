@@ -1,8 +1,6 @@
 #ifndef PLAYER_API_H
 #define PLAYER_API_H
 
-
-bool load_players_data_base(void);
-
+bool player_load_data_base(string path_to_database);
 
 #endif
