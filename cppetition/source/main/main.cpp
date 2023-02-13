@@ -1,18 +1,11 @@
-#include "..\objects\teams\team_api.h"
-#include "..\objects\players\player_api.h"
-#include "..\objects\displayer\displayer_api.h"
+#include "..\os\databases\data_base_api.h"
 
-
-bool load_data_bases(void)
-{
-    return 0; 
-}
 
 
 int main(void)
 {
-    if (load_data_bases())
-
+    /* Init Data Bases */
+    data_base_init();
 
     return 0; 
 }

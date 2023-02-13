@@ -45,6 +45,9 @@
     <ClCompile Include="source\objects\match\match.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\os\databases\data_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\main.h">
@@ -104,5 +107,17 @@
     <ClInclude Include="source\objects\match\match_api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\os\databases\data_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\databases\data_base_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\lib\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="source\os\databases\players_data_base.txt" />
   </ItemGroup>
 </Project>

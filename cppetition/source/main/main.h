@@ -3,8 +3,6 @@
 
 
 void main(void);
-bool load_data_bases(void);
-
 
 
 #endif 
