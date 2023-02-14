@@ -1,10 +1,11 @@
-#include "..\..\os\databases\data_base_api.h"
-// #include "..\teams\team.h"
-
+// #include "..\..\os\databases\data_base_api.h"
+#ifndef PLAYER_H
+#define PLAYER_H
 
 typedef enum
 {
-    GOALKEEPER  = 0, 
+    NO_VALID_POSITION = 0, 
+    GOALKEEPER, 
     DEFENDER,
     MIDFIELDER,
     STRIKER,
@@ -26,6 +27,9 @@ typedef struct
 } T_player_attributes_struct;
 
 
+/*
+* 
+*/
 class Player
 {
     public: 
@@ -48,6 +52,9 @@ class Player
 
 /* Inhered classes */
 /* GK */
+/*
+* 
+*/
 class Goalkeeper : public Player
 {
     public:
@@ -63,6 +70,9 @@ class Goalkeeper : public Player
 };
 
 /* DF */
+/*
+* 
+*/
 class Defender : public Player
 {
     public:
@@ -78,6 +88,9 @@ class Defender : public Player
 };
 
 /* MF */
+/*
+* 
+*/
 class Midfielder : public Player
 {
     public:
@@ -93,6 +106,9 @@ class Midfielder : public Player
 };
 
 /* FW */
+/*
+* 
+*/
 class Striker : public Player
 {
     public:
@@ -107,5 +123,10 @@ class Striker : public Player
 
 };
 
-
+/*
+* 
+*/
 void player_register_new_player(Player* new_player);
+
+
+#endif 

@@ -7,10 +7,12 @@
 #define MAX_PLAYERS_ALLOWED     11
 #define MIN_PLAYERS_ALLOWED     7
 
+/*
+* 
+*/
 class Team
 {
-    public: 
-        Team();
+    public:
         Team(std::string _name);
 
     private:
@@ -18,11 +20,15 @@ class Team
         unsigned char num_of_players;
         Player* list_of_players;
         long long int budget; 
+        bool ready_to_play;
 
     protected: 
 
 };
 
+/*
+* 
+*/
 void team_register_new_team(Team* new_team);
 
 

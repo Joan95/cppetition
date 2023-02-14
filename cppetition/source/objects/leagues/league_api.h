@@ -6,7 +6,9 @@
 
 #define LEAGUE_VERSION      1
 
-
+/*
+* 
+*/
 void league_register_team_to_league(std::string league_name, Team * team);
 
 

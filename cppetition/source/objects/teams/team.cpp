@@ -1,9 +1,10 @@
 #include <fstream>      /* For file reading purposes */
+#include <vector>       /* For vector usage */
 
 #include "team_api.h"
 #include "team.h"
+#include "..\..\os\databases\data_base_api.h"
 #include "..\leagues\league_api.h"
-
 
 
 Team** list_of_teams;
@@ -14,6 +15,7 @@ Team::Team(std::string _name)
 {
     name = _name; 
     Player** list_of_players = new Player * [MAX_PLAYERS_ALLOWED];
+    ready_to_play = false;
 }
 
 

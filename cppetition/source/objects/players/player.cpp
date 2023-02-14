@@ -1,10 +1,23 @@
 #include <fstream>      /* For file reading purposes */
+#include <vector>       /* For vector usage */
 
-#include "player_api.h"
-#include "player.h"
+#include "..\..\os\databases\data_base_api.h"   /* For data_base_parse_line usage */
+
+#include "player_api.h" /* API Header */
+#include "player.h"     /* Header */
 
 Player** list_of_players;
 unsigned int num_of_players;
+
+/*
+*/
+Player::Player()
+{
+    position = NO_VALID_POSITION;
+    injured = false;
+    being_covered = false;
+    has_the_ball = false;
+}
 
 /*
 */
