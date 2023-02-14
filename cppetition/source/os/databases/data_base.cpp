@@ -6,9 +6,16 @@ void data_base_init(void)
 {
     /* Call all the objects so they can init their own data bases by creating 
     the objects accordingly */
-    if (player_load_data_base("./source/os/databases/players_data_base.txt"))
+    if (!player_load_data_base("./source/os/databases/players_data_base.txt"))
     {
+        /* Error, Database not loaded properly */
+        exit(-1);
+    }
 
+    if (!team_load_data_base("./source/os/databases/teams_data_base.txt"))
+    {
+        /* Error, Database not loaded properly */
+        exit(-1);
     }
 }
 
