@@ -24,6 +24,30 @@
     <ClCompile Include="source\objects\teams\team.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\objects\leagues\league.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\displayer\displayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\os\sheduler\scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\os\timer\timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\ball\ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\field\field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\match\match.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\os\databases\data_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main\main.h">
@@ -35,5 +59,65 @@
     <ClInclude Include="source\objects\teams\team.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\objects\teams\team_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\players\player_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\leagues\league.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\leagues\league_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\displayer\displayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\displayer\displayer_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\sheduler\scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\sheduler\scheduler_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\timer\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\timer\timer_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\ball\ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\ball\ball_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\field\field.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\field\field_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\match\match.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\objects\match\match_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\databases\data_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\os\databases\data_base_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\lib\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="source\os\databases\players_data_base.txt" />
   </ItemGroup>
 </Project>

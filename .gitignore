@@ -34,3 +34,6 @@
 # Cache files 
 .vs/
 x64/
+
+# Notepad backup files
+*.bak
