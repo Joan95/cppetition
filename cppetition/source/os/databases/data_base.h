@@ -6,6 +6,7 @@
 
 /* My headers */
 #include "..\..\objects\players\player_api.h"
+#include "..\..\objects\teams\team_api.h"
 
 
 #endif 

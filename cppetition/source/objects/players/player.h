@@ -1,5 +1,5 @@
-#include "..\..\lib\types.h"    
 #include "..\..\os\databases\data_base_api.h"
+// #include "..\teams\team.h"
 
 
 typedef enum
@@ -25,6 +25,7 @@ typedef struct
     unsigned char dribbling;
 } T_player_attributes_struct;
 
+
 class Player
 {
     public: 
@@ -32,15 +33,16 @@ class Player
         Player(std::string _name, unsigned char _age, T_player_attributes_struct _attributes);
 
     private:
-        std::string name;
-        unsigned char age;
-        T_player_attributes_struct attributes; 
-        bool injured; 
-        bool being_covered;
 
     protected: 
+        std::string name;
+        unsigned char age;
         T_player_position_enum position;
-
+        T_player_attributes_struct attributes; 
+        // Team * current_team;
+        bool injured; 
+        bool being_covered;
+        bool has_the_ball; 
 };
 
 

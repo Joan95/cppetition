@@ -1,24 +1,22 @@
-#include "player.h"
-
 #include <fstream>      /* For file reading purposes */
-/* TODO: To be Erased*/
-#include <iostream>     /* For printf purposes */
-/* ----- ----- */
 
+#include "player_api.h"
+#include "player.h"
 
 Player** list_of_players;
 unsigned int num_of_players;
 
 /*
 */
-Player::Player(string _name, unsigned char _age, T_player_attributes_struct _attributes)
+Player::Player(std::string _name, unsigned char _age, T_player_attributes_struct _attributes)
 {
     name = _name;  
     age = _age; 
     attributes = _attributes;
 
     injured = false; 
-    being_covered = false; 
+    being_covered = false;
+    has_the_ball = false; 
 }
 
 /*
@@ -34,6 +32,7 @@ void player_register_new_player(Player* new_player)
     }
     else
     {
+        /* List of players has been previously initialized, just resize it */
         Player** new_list_of_players = new Player * [num_of_players + 1];
         std::copy(list_of_players, list_of_players + num_of_players, new_list_of_players);
         delete[] list_of_players;
@@ -44,10 +43,10 @@ void player_register_new_player(Player* new_player)
 
 /*
 */
-bool player_load_data_base(string path_to_data_base)
+bool player_load_data_base(std::string path_to_data_base)
 {
     Player * newPlayer;
-    string dbPlayerLine;
+    std::string dbPlayerLine;
     T_player_attributes_struct newPlayerAttributes; 
     std::vector<std::string> player_attributes; 
 
@@ -58,7 +57,6 @@ bool player_load_data_base(string path_to_data_base)
     {
         while (getline(PlayerDB, dbPlayerLine))
         {
-            std::cout << dbPlayerLine;
             player_attributes = data_base_parse_line(dbPlayerLine);
             newPlayerAttributes.average = stoi(player_attributes[3]);
             newPlayerAttributes.regularity = stoi(player_attributes[4]);
