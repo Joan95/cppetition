@@ -6,6 +6,8 @@
 #include "player_api.h" /* API Header */
 #include "player.h"     /* Header */
 
+#define BASE_INITIAL_SALARY_EXPECTATION     -10
+
 Player** list_of_players;
 unsigned int num_of_players;
 
@@ -13,10 +15,14 @@ unsigned int num_of_players;
 */
 Player::Player()
 {
+    name = "";
+    age = 0;
     position = NO_VALID_POSITION;
     injured = false;
-    being_covered = false;
-    has_the_ball = false;
+    game_attributes.being_covered = false;
+    game_attributes.has_the_ball = false;
+    contract_attributes.current_job_status = FREE_AGENT;
+    contract_attributes.expected_salary = BASE_INITIAL_SALARY_EXPECTATION;
 }
 
 /*
@@ -25,11 +31,12 @@ Player::Player(std::string _name, unsigned char _age, T_player_attributes_struct
 {
     name = _name;  
     age = _age; 
-    attributes = _attributes;
-
-    injured = false; 
-    being_covered = false;
-    has_the_ball = false; 
+    player_attributes = _attributes;
+    injured = false;
+    game_attributes.being_covered = false;
+    game_attributes.has_the_ball = false;
+    contract_attributes.current_job_status = FREE_AGENT;
+    contract_attributes.expected_salary = BASE_INITIAL_SALARY_EXPECTATION;
 }
 
 /*
@@ -83,7 +90,7 @@ bool player_load_data_base(std::string path_to_data_base)
             newPlayerAttributes.saving = stoi(player_attributes[12]);
             newPlayerAttributes.dribbling = stoi(player_attributes[13]);
          
-            switch ((T_player_position_enum) stoi(player_attributes[2]))
+            switch ((T_soccer_position_enum) stoi(player_attributes[2]))
             {
                 case GOALKEEPER:
                     newPlayer = new Goalkeeper(player_attributes[0], stoi(player_attributes[1]), newPlayerAttributes);

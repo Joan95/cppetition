@@ -1,15 +1,28 @@
-// #include "..\..\os\databases\data_base_api.h"
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "..\..\lib\types.h"
+#include "..\..\lib\soccer_types.h"
+
 typedef enum
 {
-    NO_VALID_POSITION = 0, 
-    GOALKEEPER, 
-    DEFENDER,
-    MIDFIELDER,
-    STRIKER,
-} T_player_position_enum;
+    FREE_AGENT = 0,
+    IN_A_TEAM,
+    TO_BE_TRANSFERRED,
+    TO_BE_FIRED
+} T_player_contract_enum;
+
+typedef struct
+{
+    T_player_contract_enum current_job_status;
+    long long expected_salary;
+} T_player_contract_status;
+
+typedef struct
+{
+    bool being_covered;
+    bool has_the_ball;
+} T_player_on_game_attributes;
 
 typedef struct
 {
@@ -41,12 +54,11 @@ class Player
     protected: 
         std::string name;
         unsigned char age;
-        T_player_position_enum position;
-        T_player_attributes_struct attributes; 
-        // Team * current_team;
+        T_soccer_position_enum position;
+        T_player_attributes_struct player_attributes; 
         bool injured; 
-        bool being_covered;
-        bool has_the_ball; 
+        T_player_on_game_attributes game_attributes;
+        T_player_contract_status contract_attributes;
 };
 
 

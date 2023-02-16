@@ -28,7 +28,16 @@ int main(void)
     /* Init phase */
     init(); 
 
+    /* Teams get ready for starting */
+    season_loop();
+
     /* Play seasons */
+
+    /* Infinite loop */
+    while (true)
+    {
+        /* Nothing to do here... */
+    }
 
     return 0; 
 }

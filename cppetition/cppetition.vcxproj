@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="source\main\main.cpp" />
     <ClCompile Include="source\objects\ball\ball.cpp" />
+    <ClCompile Include="source\objects\contracts\contract.cpp" />
     <ClCompile Include="source\objects\displayer\displayer.cpp" />
     <ClCompile Include="source\objects\faults\fault.cpp" />
     <ClCompile Include="source\objects\field\field.cpp" />
@@ -143,10 +144,13 @@
     <ClCompile Include="source\os\timer\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\lib\soccer_types.h" />
     <ClInclude Include="source\lib\types.h" />
     <ClInclude Include="source\main\main.h" />
     <ClInclude Include="source\objects\ball\ball.h" />
     <ClInclude Include="source\objects\ball\ball_api.h" />
+    <ClInclude Include="source\objects\contracts\contract.h" />
+    <ClInclude Include="source\objects\contracts\contract_api.h" />
     <ClInclude Include="source\objects\displayer\displayer.h" />
     <ClInclude Include="source\objects\displayer\displayer_api.h" />
     <ClInclude Include="source\objects\faults\fault.h" />

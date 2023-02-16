@@ -1,6 +1,7 @@
 #ifndef SEASON_H
 #define SEASON_H
 
+#include "..\leagues\league_api.h"
 
 typedef enum
 {
@@ -21,9 +22,12 @@ class Season
 {
     public:
         Season();
+        T_season_period_enum GetPeriod();
+        unsigned char GetNumLeagues();
 
     private:
         T_season_period_enum period;
+        T_leagues_struct * season_leagues;
 
     protected:
 };

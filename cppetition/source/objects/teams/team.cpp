@@ -14,10 +14,42 @@ unsigned int num_of_teams;
 Team::Team(std::string _name)
 {
     name = _name; 
-    Player** list_of_players = new Player * [MAX_PLAYERS_ALLOWED];
+    Contract** list_of_contracts = new Contract * [MAX_PLAYERS_ALLOWED];
+    list_of_needs = new T_team_needs[MIN_PLAYERS_ALLOWED];
+    this->DetectNeeds();
     ready_to_play = false;
 }
 
+void Team::DetectNeeds(void)
+{
+    T_soccer_position_enum pos_to_hire;
+    long long budget_per_position; 
+
+    budget_per_position = this->budget / MIN_PLAYERS_ALLOWED;
+
+    for (int i = 0; i < MIN_PLAYERS_ALLOWED; i++)
+    {
+        if (i == 0)
+        {
+            pos_to_hire = GOALKEEPER;
+        }
+        else if (i < 5)
+        {
+            pos_to_hire = DEFENDER;
+        }
+        else if (i < 8)
+        {
+            pos_to_hire = MIDFIELDER;
+        }
+        else
+        {
+            pos_to_hire = STRIKER;
+        }
+        
+        list_of_needs[i].position_to_hire = pos_to_hire;
+        list_of_needs[i].position_budget = budget_per_position;
+    }
+}
 
 void team_register_new_team(Team* new_team)
 {
