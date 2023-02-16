@@ -13,7 +13,7 @@ class League
     public: 
         League();
         League(std::string _name);
-        void addTeam(Team* team);
+        void AddTeam(Team* team);
         std::string GetLeagueName(void);
 
     private: 
