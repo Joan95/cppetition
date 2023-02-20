@@ -1,8 +1,14 @@
 #include "league.h"
 #include "league_api.h"
 
-League** list_of_leagues;
-unsigned char num_of_leagues; 
+static League** list_of_leagues;
+static unsigned char num_of_leagues;
+
+League::League()
+{
+    num_of_teams = 0;
+    list_of_teams = nullptr;
+}
 
 League::League(std::string _name)
 {
@@ -10,7 +16,7 @@ League::League(std::string _name)
     num_of_teams = 0;
 }
 
-void League::addTeam(Team* team)
+void League::AddTeam(Team* team)
 {
     if (list_of_teams == nullptr)
     {
@@ -35,6 +41,16 @@ std::string League::GetLeagueName(void)
     return name;
 }
 
+unsigned char League::GetNumTeams(void)
+{
+    return this->num_of_teams;
+}
+
+Team* League::GetTeam(unsigned char idx)
+{
+    return this->list_of_teams[idx];
+}
+
 void league_register_team_to_league(std::string league_name, Team * team)
 {
     unsigned char i = 0; 
@@ -49,7 +65,7 @@ void league_register_team_to_league(std::string league_name, Team * team)
         list_of_leagues = new League * [1];
         list_of_leagues[num_of_leagues++] = newLeague;
 
-        newLeague->addTeam(team);
+        newLeague->AddTeam(team);
     }
     else
     {
@@ -61,7 +77,7 @@ void league_register_team_to_league(std::string league_name, Team * team)
             {
                 /* League is there, just add team into league */
                 leagueFound = true;
-                list_of_leagues[i]->addTeam(team);
+                list_of_leagues[i]->AddTeam(team);
             }
             i++;
         }
@@ -79,7 +95,15 @@ void league_register_team_to_league(std::string league_name, Team * team)
             list_of_leagues[num_of_leagues++] = newLeague;
 
             /* Add team to this league */
-            newLeague->addTeam(team);
+            newLeague->AddTeam(team);
         }
     }
+}
+
+T_leagues_struct * get_leagues(void)
+{
+    T_leagues_struct * leagues = new T_leagues_struct;
+    leagues->leagues = list_of_leagues;
+    leagues->num_of_leagues = num_of_leagues;
+    return leagues;
 }

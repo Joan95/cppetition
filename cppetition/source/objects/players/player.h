@@ -1,14 +1,15 @@
-#include "..\..\os\databases\data_base_api.h"
-// #include "..\teams\team.h"
+#ifndef PLAYER_H
+#define PLAYER_H
+
+#include "..\..\lib\types.h"
+#include "..\..\lib\soccer_types.h"
 
 
-typedef enum
+typedef struct
 {
-    GOALKEEPER  = 0, 
-    DEFENDER,
-    MIDFIELDER,
-    STRIKER,
-} T_player_position_enum;
+    bool being_covered;
+    bool has_the_ball;
+} T_player_on_game_attributes;
 
 typedef struct
 {
@@ -26,6 +27,9 @@ typedef struct
 } T_player_attributes_struct;
 
 
+/*
+* 
+*/
 class Player
 {
     public: 
@@ -37,17 +41,18 @@ class Player
     protected: 
         std::string name;
         unsigned char age;
-        T_player_position_enum position;
-        T_player_attributes_struct attributes; 
-        // Team * current_team;
+        T_soccer_position_enum position;
+        T_player_attributes_struct player_attributes; 
         bool injured; 
-        bool being_covered;
-        bool has_the_ball; 
+        T_player_on_game_attributes game_attributes;
 };
 
 
 /* Inhered classes */
 /* GK */
+/*
+* 
+*/
 class Goalkeeper : public Player
 {
     public:
@@ -63,6 +68,9 @@ class Goalkeeper : public Player
 };
 
 /* DF */
+/*
+* 
+*/
 class Defender : public Player
 {
     public:
@@ -78,6 +86,9 @@ class Defender : public Player
 };
 
 /* MF */
+/*
+* 
+*/
 class Midfielder : public Player
 {
     public:
@@ -93,6 +104,9 @@ class Midfielder : public Player
 };
 
 /* FW */
+/*
+* 
+*/
 class Striker : public Player
 {
     public:
@@ -108,4 +122,4 @@ class Striker : public Player
 };
 
 
-void player_register_new_player(Player* new_player);
+#endif 

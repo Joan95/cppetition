@@ -1,10 +1,26 @@
 #include <fstream>      /* For file reading purposes */
+#include <vector>       /* For vector usage */
 
-#include "player_api.h"
-#include "player.h"
+#include "..\..\os\databases\data_base_api.h"   /* For data_base_parse_line usage */
+#include "..\contracts\contract_api.h"
 
-Player** list_of_players;
-unsigned int num_of_players;
+#include "player_api.h" /* API Header */
+#include "player.h"     /* Header */
+
+#define BASE_INITIAL_SALARY_EXPECTATION     -10
+
+
+/*
+*/
+Player::Player()
+{
+    name = "";
+    age = 0;
+    position = NO_VALID_POSITION;
+    injured = false;
+    game_attributes.being_covered = false;
+    game_attributes.has_the_ball = false;
+}
 
 /*
 */
@@ -12,33 +28,10 @@ Player::Player(std::string _name, unsigned char _age, T_player_attributes_struct
 {
     name = _name;  
     age = _age; 
-    attributes = _attributes;
-
-    injured = false; 
-    being_covered = false;
-    has_the_ball = false; 
-}
-
-/*
-*/
-void player_register_new_player(Player* new_player)
-{
-    if (list_of_players == nullptr)
-    {
-        /* List of players has not been initialized */
-        list_of_players = new Player * [1];
-        num_of_players = 0; 
-        list_of_players[num_of_players++] = new_player;
-    }
-    else
-    {
-        /* List of players has been previously initialized, just resize it */
-        Player** new_list_of_players = new Player * [num_of_players + 1];
-        std::copy(list_of_players, list_of_players + num_of_players, new_list_of_players);
-        delete[] list_of_players;
-        list_of_players = new_list_of_players;
-        list_of_players[num_of_players++] = new_player;
-    }
+    player_attributes = _attributes;
+    injured = false;
+    game_attributes.being_covered = false;
+    game_attributes.has_the_ball = false;
 }
 
 /*
@@ -70,26 +63,26 @@ bool player_load_data_base(std::string path_to_data_base)
             newPlayerAttributes.saving = stoi(player_attributes[12]);
             newPlayerAttributes.dribbling = stoi(player_attributes[13]);
          
-            switch ((T_player_position_enum) stoi(player_attributes[2]))
+            switch ((T_soccer_position_enum) stoi(player_attributes[2]))
             {
                 case GOALKEEPER:
                     newPlayer = new Goalkeeper(player_attributes[0], stoi(player_attributes[1]), newPlayerAttributes);
-                    player_register_new_player(newPlayer);
+                    contract_generate_new_contract(newPlayer);
                     break; 
 
                 case DEFENDER:
                     newPlayer = new Defender(player_attributes[0], stoi(player_attributes[1]), newPlayerAttributes);
-                    player_register_new_player(newPlayer);
+                    contract_generate_new_contract(newPlayer);
                     break; 
 
                 case MIDFIELDER:
                     newPlayer = new Midfielder(player_attributes[0], stoi(player_attributes[1]), newPlayerAttributes);
-                    player_register_new_player(newPlayer);
+                    contract_generate_new_contract(newPlayer);
                     break; 
 
                 case STRIKER:
                     newPlayer = new Striker(player_attributes[0], stoi(player_attributes[1]), newPlayerAttributes);
-                    player_register_new_player(newPlayer);
+                    contract_generate_new_contract(newPlayer);
                     break; 
 
                 default:

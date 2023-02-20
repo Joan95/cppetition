@@ -5,13 +5,18 @@
 #include "..\teams\team.h"
 
 
+/*
+* 
+*/
 class League
 {
     public: 
         League();
         League(std::string _name);
-        void addTeam(Team* team);
+        void AddTeam(Team* team);
         std::string GetLeagueName(void);
+        unsigned char GetNumTeams(void);
+        Team* GetTeam(unsigned char idx);
 
     private: 
         std::string name;

@@ -2,6 +2,14 @@
 #define MAIN_H
 
 
+/*
+* 
+*/
+void init(void);
+
+/*
+* 
+*/
 void main(void);
 
 
