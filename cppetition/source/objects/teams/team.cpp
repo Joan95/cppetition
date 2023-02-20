@@ -7,14 +7,13 @@
 #include "..\leagues\league_api.h"
 
 
-Team** list_of_teams;
-unsigned int num_of_teams;
+//Team** list_of_teams;
+//unsigned int num_of_teams;
 
 
 Team::Team(std::string _name)
 {
-    name = _name; 
-    Contract** list_of_contracts = new Contract * [MAX_PLAYERS_ALLOWED];
+    name = _name;
     list_of_needs = new T_team_needs[MIN_PLAYERS_ALLOWED];
     this->DetectNeeds();
     ready_to_play = false;
@@ -51,25 +50,12 @@ void Team::DetectNeeds(void)
     }
 }
 
-void team_register_new_team(Team* new_team)
+void Team::LoopContractOperation(void)
 {
-    if (list_of_teams == nullptr)
-    {
-        /* List of teams has not been initialized */
-        list_of_teams = new Team * [1];
-        num_of_teams = 0;
-        list_of_teams[num_of_teams++] = new_team;
-    }
-    else
-    {
-        /* List of teams has been previously initialized, just resize it */
-        Team** new_list_of_teams = new Team * [num_of_teams + 1];
-        std::copy(list_of_teams, list_of_teams + num_of_teams, new_list_of_teams);
-        delete[] list_of_teams;
-        list_of_teams = new_list_of_teams;
-        list_of_teams[num_of_teams++] = new_team;
-    }
+
+    
 }
+
 
 bool team_load_data_base(std::string path_to_data_base)
 {
@@ -86,7 +72,6 @@ bool team_load_data_base(std::string path_to_data_base)
         {
             team_attributes = data_base_parse_line(dbTeamLine);
             newTeam = new Team(team_attributes[0]);
-            team_register_new_team(newTeam);
             league_register_team_to_league(team_attributes[1], newTeam);
         }
 

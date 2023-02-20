@@ -24,6 +24,7 @@ class Season
         Season();
         T_season_period_enum GetPeriod();
         unsigned char GetNumLeagues();
+        League* GetLeague(unsigned char idx);
 
     private:
         T_season_period_enum period;

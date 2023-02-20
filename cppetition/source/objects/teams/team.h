@@ -3,7 +3,6 @@
 
 #include "..\..\lib\types.h"
 #include "..\..\lib\soccer_types.h"
-#include "..\contracts\contract.h"
 
 #define MAX_PLAYERS_ALLOWED     21
 #define MIN_PLAYERS_ALLOWED     11
@@ -23,23 +22,20 @@ class Team
     public:
         Team(std::string _name);
         void DetectNeeds(void);
+        void LoopContractOperation(void);
 
     private:
         std::string name; 
         unsigned char num_of_contracts;
-        Contract* list_of_contracts;
+        unsigned char num_of_offers_made;
         long long int budget; 
         bool ready_to_play;
         T_team_needs* list_of_needs;
 
+
     protected: 
 
 };
-
-/*
-* 
-*/
-void team_register_new_team(Team* new_team);
 
 
 #endif

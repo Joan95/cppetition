@@ -4,19 +4,6 @@
 #include "..\..\lib\types.h"
 #include "..\..\lib\soccer_types.h"
 
-typedef enum
-{
-    FREE_AGENT = 0,
-    IN_A_TEAM,
-    TO_BE_TRANSFERRED,
-    TO_BE_FIRED
-} T_player_contract_enum;
-
-typedef struct
-{
-    T_player_contract_enum current_job_status;
-    long long expected_salary;
-} T_player_contract_status;
 
 typedef struct
 {
@@ -58,7 +45,6 @@ class Player
         T_player_attributes_struct player_attributes; 
         bool injured; 
         T_player_on_game_attributes game_attributes;
-        T_player_contract_status contract_attributes;
 };
 
 
@@ -134,11 +120,6 @@ class Striker : public Player
     protected:
 
 };
-
-/*
-* 
-*/
-void player_register_new_player(Player* new_player);
 
 
 #endif 

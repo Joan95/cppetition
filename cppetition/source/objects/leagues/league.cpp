@@ -41,6 +41,16 @@ std::string League::GetLeagueName(void)
     return name;
 }
 
+unsigned char League::GetNumTeams(void)
+{
+    return this->num_of_teams;
+}
+
+Team* League::GetTeam(unsigned char idx)
+{
+    return this->list_of_teams[idx];
+}
+
 void league_register_team_to_league(std::string league_name, Team * team)
 {
     unsigned char i = 0; 

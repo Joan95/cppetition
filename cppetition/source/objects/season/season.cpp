@@ -20,6 +20,11 @@ unsigned char Season::GetNumLeagues()
     return season_leagues->num_of_leagues;
 }
 
+League* Season::GetLeague(unsigned char idx)
+{
+    return this->season_leagues->leagues[idx];
+}
+
 
 void season_init(void)
 {
@@ -29,6 +34,8 @@ void season_init(void)
 
 void season_loop(void)
 {
+    League* target_league; 
+
     switch (this_season->GetPeriod())
     {
     case PRESEASON:
@@ -38,7 +45,11 @@ void season_loop(void)
         */
         for (int i = 0; i < this_season->GetNumLeagues(); i++)
         {
-            
+            target_league = this_season->GetLeague(i);
+            for (int j = 0; j < target_league->GetNumTeams(); j++)
+            {
+                target_league->GetTeam(j)->LoopContractOperation();
+            }
         }
         break;
 
